@@ -11,25 +11,11 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/contacts")
-public class ContactController {
+@RequestMapping(value = "/contacts/private")
+public class ContactControllerPrivate {
     @Autowired
     private ContactService contactService;
 
-    @GetMapping("/")
-    public ResponseEntity<List<Contact>> getAllUsers() {
-        return new ResponseEntity<>(contactService.getAll(), HttpStatus.OK);
-    }
-
-    @GetMapping("/byName/{name}")
-    public ResponseEntity<Contact> getContactByName(@PathVariable String name){
-        return new ResponseEntity<>(contactService.getContactByName(name), HttpStatus.OK);
-    }
-
-    @GetMapping("{id}")
-    public  ResponseEntity<Contact> getContactByID(@PathVariable Long id){
-        return new ResponseEntity<>(contactService.getContactByID(id).orElseThrow(EntityNotFoundException::new), HttpStatus.OK);
-    }
     @PutMapping("{id}")
     public  ResponseEntity<Contact> updateContact(@RequestBody Contact contact, @PathVariable Long id) {
         contact.setId(id);
@@ -37,7 +23,7 @@ public class ContactController {
         return new ResponseEntity<>(contactService.updateContact(contact), HttpStatus.CREATED); // or accepted
     }
 
-    @PostMapping
+    @PostMapping({"{id}"})
     public ResponseEntity<Contact> saveContact(@RequestBody Contact contact){
         return new ResponseEntity<>(contactService.saveContact(contact), HttpStatus.CREATED);
     }

@@ -3,6 +3,7 @@ package com.example.addressbook.config;
 import com.example.addressbook.dao.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -32,7 +33,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**/auth/**")
+                .antMatchers("/**/auth/**","/contacts/public/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

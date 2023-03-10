@@ -3,22 +3,26 @@ package com.example.addressbook.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-public class Contact {
+@ToString
+public class ApplicationUser {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String username;
-    private String address;
 
-    @Column(length = 2000)
-    private String imageUrl;
+    @Column(unique = true)
+    private String email;
 
+
+    private String password;
 
 
 
