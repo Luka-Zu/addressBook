@@ -11,6 +11,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/contacts/private")
 public class ContactControllerPrivate {
     @Autowired
