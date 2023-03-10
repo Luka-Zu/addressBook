@@ -10,7 +10,7 @@ it checks for user login and returnes key
 Post:
 http://localhost:8080/pe/auth/register
 RequestBody:{String:password, String:password}
-it registers a user
+it registers a user, adds user in database
 
 Get:
 http://localhost:8080/contacts/private/{id}
