@@ -37,8 +37,11 @@ public class JwtAthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+        System.out.println(authHeader+"   authHeader");
         jwtToken = authHeader.substring(7);
+        System.out.println(jwtToken+"   jwtTOken");
         userEmail = jwtUtils.extractUsername(jwtToken);
+        System.out.println(userEmail+ "   Username");
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = userDao.FindUserByEmail(userEmail);
 

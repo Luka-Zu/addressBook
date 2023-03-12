@@ -38,10 +38,12 @@ public class JwtUtils {
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
+        System.out.println(claims+"     claims");
         return claimsResolver.apply(claims);
     }
 
     private Claims extractAllClaims(String token) {
+
         return Jwts.parser().setSigningKey(jwtSigningKey).parseClaimsJws(token).getBody();
     }
 

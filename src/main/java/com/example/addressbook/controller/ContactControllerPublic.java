@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/contacts/public")
 public class ContactControllerPublic {
     @Autowired
@@ -28,7 +28,7 @@ public class ContactControllerPublic {
 
     @GetMapping("/")
     public ResponseEntity<List<Contact>> getAllUsers() {
-        System.out.println("ragaca");
+
         return new ResponseEntity<>(contactService.getAll(), HttpStatus.OK);
     }
 

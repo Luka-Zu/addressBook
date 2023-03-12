@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowedHeaders = "*")
 @RequestMapping(value = "/contacts/private")
 public class ContactControllerPrivate {
     @Autowired
@@ -19,12 +20,24 @@ public class ContactControllerPrivate {
 
     @PutMapping("{id}")
     public  ResponseEntity<Contact> updateContact(@RequestBody Contact contact, @PathVariable Long id) {
-        contact.setId(id);
+        Optional<Contact> existingContact = contactService.getContactByID(id);
 
-        return new ResponseEntity<>(contactService.updateContact(contact), HttpStatus.CREATED); // or accepted
+        if (existingContact.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }else{
+
+            Contact contact1 = existingContact.get();
+            contact1.setAddress(contact.getAddress());
+            contact1.setId(id);
+            contact1.setImageUrl(contact.getImageUrl());
+            contact1.setUsername(contact.getUsername());
+            Contact updatedContact = contactService.updateContact(contact1);
+            return ResponseEntity.ok(updatedContact); // or accepted
+        }
+
     }
 
-    @PostMapping({"{id}"})
+    @PostMapping()
     public ResponseEntity<Contact> saveContact(@RequestBody Contact contact){
         return new ResponseEntity<>(contactService.saveContact(contact), HttpStatus.CREATED);
     }

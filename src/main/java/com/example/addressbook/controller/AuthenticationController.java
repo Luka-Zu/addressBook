@@ -16,7 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 @RestController
 @RequestMapping(value = "/pe/auth")
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;

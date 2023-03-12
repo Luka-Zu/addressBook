@@ -31,7 +31,6 @@ public class ContactService {
     }
 
     public Contact updateContact(Contact contact) {
-        contactRepository.deleteById(contact.getId());
 
         return contactRepository.save(contact);
     }
