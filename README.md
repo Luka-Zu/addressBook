@@ -1,6 +1,7 @@
 # addressBook
 restfull api for crud operations
 
+Spring boot + Spring security + coonecting to database
 
 Post:
 http://localhost:8080/pe/auth/authenticate
